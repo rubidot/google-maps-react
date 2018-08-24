@@ -13,29 +13,13 @@ export class Popup extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {google, map} = this.props;
-
+    
     if (!google || !map) {
       return;
     }
-
+    
     if (map !== prevProps.map) {
       this.renderPopup();
-    }
-
-    if (this.props.position !== prevProps.position) {
-      this.updatePosition();
-    }
-
-    if (this.props.children !== prevProps.children) {
-      this.updateContent();
-    }
-
-    if ((this.props.visible !== prevProps.visible ||
-        this.props.marker !== prevProps.marker ||
-        this.props.position !== prevProps.position)) {
-        this.props.visible ?
-          this.openWindow() :
-          this.closeWindow();
     }
   }
 
@@ -54,58 +38,14 @@ export class Popup extends React.Component {
     const Overlay = GetOverlay( google )
     this.overlay = new Overlay( props, this.anchor )
     this.overlay.setMap( map )
-
-    // const iw = this.Popup = new google.maps.InfoWindow({
-    //   content: '',
-    //   ...props
-    // });
-    // 
-    // google.maps.event
-    //   .addListener(iw, 'closeclick', this.onClose.bind(this))
-    // google.maps.event
-    //   .addListener(iw, 'domready', this.onOpen.bind(this));
   }
-  // 
-  // onOpen() {
-  //   if (this.props.onOpen) {
-  //     this.props.onOpen();
-  //   }
-  // }
-  // 
-  // onClose() {
-  //   if (this.props.onClose) {
-  //     this.props.onClose();
-  //   }
-  // }
 
   openWindow() {
     this.Popup.open(this.props.map, this.props.marker);
   }
-  
-  updatePosition() {
-    let pos = this.props.position;
-    if (!(pos instanceof google.maps.LatLng)) {
-      pos = pos && new google.maps.LatLng(pos.lat, pos.lng);
-    }
-    this.Popup.setPosition(pos);
-  }
-  // 
-  // updateContent() {
-  //   const content = this.renderChildren();
-  //   this.Popup.setContent(content);
-  // }
-  // 
-  // closeWindow() {
-  //   this.Popup.close();
-  // }
-  // 
-  // renderChildren() {
-  //   const {children} = this.props;
-  //   return ReactDOMServer.renderToString(children);
-  // }
 
   render() {
-    return <div ref={ this.anchor } style={ {position:'absolute'}}>{this.props.children}</div>;
+    return <div ref={ this.anchor } style={ {position:'absolute'} }>{this.props.children}</div>;
   }
 }
 

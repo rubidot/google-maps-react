@@ -67,9 +67,9 @@ class WithMarkers extends Component {
         </Popup>*/}
 
         {<Popup position={{ lat: 37.765703, lng: -122.42564 }} visible>
-          <small>
-            Click on any of the markers to display an additional info.
-          </small>
+          <h1 style={{ background: 'white', position: 'absolute', bottom: 0, padding: '1em', width: '10em' }}>
+            Just a floating popup.
+          </h1>
         </Popup>}
       </Map>
     );
