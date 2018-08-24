@@ -43,7 +43,7 @@ class WithMarkers extends Component {
         onClick={this.onMapClicked}
         style={{ height: '100%', position: 'relative', width: '100%' }}
         zoom={14}>
-        <Marker
+        { /* <Marker
           name="SOMA"
           onClick={this.onMarkerClick}
           position={{ lat: 37.778519, lng: -122.40564 }}
@@ -55,22 +55,22 @@ class WithMarkers extends Component {
           position={{ lat: 37.759703, lng: -122.428093 }}
         />
 
-        <Marker name="Current location" onClick={this.onMarkerClick} />
+        <Marker name="Current location" onClick={this.onMarkerClick} /> */}
 
-        <Popup
+        {/*<Popup
           marker={this.state.activeMarker}
           onClose={this.onPopupClose}
           visible={this.state.showingPopup}>
           <div>
             <h1>{this.state.selectedPlace.name}</h1>
           </div>
-        </Popup>
+        </Popup>*/}
 
-        <Popup position={{ lat: 37.765703, lng: -122.42564 }} visible>
+        {<Popup position={{ lat: 37.765703, lng: -122.42564 }} visible>
           <small>
             Click on any of the markers to display an additional info.
           </small>
-        </Popup>
+        </Popup>}
       </Map>
     );
   }

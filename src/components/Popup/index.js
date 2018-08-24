@@ -7,6 +7,7 @@ import GetOverlay from './overlay'
 export class Popup extends React.Component {
 
   componentDidMount() {
+    this.anchor = React.createRef()
     this.renderPopup();
   }
 
@@ -46,42 +47,41 @@ export class Popup extends React.Component {
       ...props
     } = this.props;
 
-    if (!google || !google.maps) {
+    if (!google || !google.maps ) {
       return;
     }
     
     const Overlay = GetOverlay( google )
-    this.overlay = new Overlay( props )
+    this.overlay = new Overlay( props, this.anchor )
     this.overlay.setMap( map )
-    console.log( this.overlay )
 
-    const iw = this.Popup = new google.maps.InfoWindow({
-      content: '',
-      ...props
-    });
-
-    google.maps.event
-      .addListener(iw, 'closeclick', this.onClose.bind(this))
-    google.maps.event
-      .addListener(iw, 'domready', this.onOpen.bind(this));
+    // const iw = this.Popup = new google.maps.InfoWindow({
+    //   content: '',
+    //   ...props
+    // });
+    // 
+    // google.maps.event
+    //   .addListener(iw, 'closeclick', this.onClose.bind(this))
+    // google.maps.event
+    //   .addListener(iw, 'domready', this.onOpen.bind(this));
   }
-
-  onOpen() {
-    if (this.props.onOpen) {
-      this.props.onOpen();
-    }
-  }
-
-  onClose() {
-    if (this.props.onClose) {
-      this.props.onClose();
-    }
-  }
+  // 
+  // onOpen() {
+  //   if (this.props.onOpen) {
+  //     this.props.onOpen();
+  //   }
+  // }
+  // 
+  // onClose() {
+  //   if (this.props.onClose) {
+  //     this.props.onClose();
+  //   }
+  // }
 
   openWindow() {
     this.Popup.open(this.props.map, this.props.marker);
   }
-
+  
   updatePosition() {
     let pos = this.props.position;
     if (!(pos instanceof google.maps.LatLng)) {
@@ -89,23 +89,23 @@ export class Popup extends React.Component {
     }
     this.Popup.setPosition(pos);
   }
-
-  updateContent() {
-    const content = this.renderChildren();
-    this.Popup.setContent(content);
-  }
-
-  closeWindow() {
-    this.Popup.close();
-  }
-
-  renderChildren() {
-    const {children} = this.props;
-    return ReactDOMServer.renderToString(children);
-  }
+  // 
+  // updateContent() {
+  //   const content = this.renderChildren();
+  //   this.Popup.setContent(content);
+  // }
+  // 
+  // closeWindow() {
+  //   this.Popup.close();
+  // }
+  // 
+  // renderChildren() {
+  //   const {children} = this.props;
+  //   return ReactDOMServer.renderToString(children);
+  // }
 
   render() {
-    return null;
+    return <div ref={ this.anchor } style={ {position:'absolute'}}>{this.props.children}</div>;
   }
 }
 
