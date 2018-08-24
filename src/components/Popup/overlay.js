@@ -29,5 +29,10 @@ export default ( google ) => {
 		onAdd(){
 	    this.getPanes().floatPane.appendChild(this.anchor);
 	  }
+		onRemove(){
+			if (this.anchor.parentElement) {
+	      this.anchor.parentElement.removeChild(this.anchor);
+	    }
+		}
 	}
 }
