@@ -20,6 +20,7 @@ import HeatMap from './components/withHeatMap';
 import Polygon from './components/withPolygons';
 import Polyline from './components/withPolylines';
 import CustomEvents from './components/resizeEvent';
+import CustomPopups from './components/customPopups';
 
 const routes = [
   {
@@ -66,6 +67,11 @@ const routes = [
     path: '/onResizeEvent',
     name: 'Custom events',
     component: CustomEvents
+  },
+  {
+    path: '/customPopups',
+    name: 'Custom Popups',
+    component: CustomPopups
   }
 ];
 
