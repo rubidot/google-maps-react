@@ -7,45 +7,34 @@ import GetOverlay from './overlay'
 export class Popup extends React.Component {
 
   componentDidMount() {
-    this.anchor = React.createRef()
-    this.renderPopup();
+    const Overlay = GetOverlay( google )
+    this.overlay = new Overlay( this.props )
+    this.overlay.setMap( this.props.map )
   }
 
   componentDidUpdate(prevProps) {
-    const {google, map} = this.props;
+    const { children, google, map, position } = this.props;
     
     if (!google || !map) {
       return;
     }
-    
     if (map !== prevProps.map) {
-      this.renderPopup();
+      this.overlay.setMap( map )
+    }
+    if( position !== prevProps.position ){
+      this.overlay.setMap( null )
+      this.overlay.position = position
+      this.overlay.setMap( map )
+    }
+    if ( children !== prevProps.children) {
+      this.overlay.children = children
     }
   }
-
-  renderPopup() {
-    const {
-      map,
-      google,
-      mapCenter,
-      ...props
-    } = this.props;
-
-    if (!google || !google.maps ) {
-      return;
-    }
-    
-    const Overlay = GetOverlay( google )
-    this.overlay = new Overlay( props, this.anchor )
-    this.overlay.setMap( map )
+  componentWillUnmount(){
+    if( this.overlay ) this.overlay.setMap( null );
   }
-
-  openWindow() {
-    this.Popup.open(this.props.map, this.props.marker);
-  }
-
   render() {
-    return <div ref={ this.anchor } style={ {position:'absolute'} }>{this.props.children}</div>;
+    return null;
   }
 }
 

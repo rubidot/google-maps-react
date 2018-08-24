@@ -7,31 +7,16 @@ import Marker from '../../src/components/Marker';
 
 class WithMarkers extends Component {
   state = {
-    activeMarker: {},
-    selectedPlace: {},
-    showingPopup: false
+    selectedPlace: {}
   };
 
-  onMarkerClick = (props, marker) =>
+  onMarkerClick = (props, marker) =>{
     this.setState({
-      activeMarker: marker,
-      selectedPlace: props,
-      showingPopup: true
-    });
+      position: marker.position,
+      selectedPlace: props
+    });}
 
-  onPopupClose = () =>
-    this.setState({
-      activeMarker: null,
-      showingPopup: false
-    });
-
-  onMapClicked = () => {
-    if (this.state.showingPopup)
-      this.setState({
-        activeMarker: null,
-        showingPopup: false
-      });
-  };
+  onMapClicked = () => this.setState({ position: null });
 
   render() {
     if (!this.props.loaded) return <div>Loading...</div>;
@@ -43,7 +28,7 @@ class WithMarkers extends Component {
         onClick={this.onMapClicked}
         style={{ height: '100%', position: 'relative', width: '100%' }}
         zoom={14}>
-        { /* <Marker
+        <Marker
           name="SOMA"
           onClick={this.onMarkerClick}
           position={{ lat: 37.778519, lng: -122.40564 }}
@@ -55,18 +40,15 @@ class WithMarkers extends Component {
           position={{ lat: 37.759703, lng: -122.428093 }}
         />
 
-        <Marker name="Current location" onClick={this.onMarkerClick} /> */}
+        <Marker name="Current location" onClick={this.onMarkerClick} />
 
-        {/*<Popup
-          marker={this.state.activeMarker}
-          onClose={this.onPopupClose}
-          visible={this.state.showingPopup}>
-          <div>
+        { this.state.position && <Popup position={ this.state.position } >
+          <div style={{ background: 'white', position: 'absolute', bottom: '5em', left: '-6em', padding: '1em', width: '10em' }}>
             <h1>{this.state.selectedPlace.name}</h1>
           </div>
-        </Popup>*/}
+        </Popup> }
 
-        {<Popup position={{ lat: 37.765703, lng: -122.42564 }} visible>
+        {<Popup position={{ lat: 37.765703, lng: -122.42564 }} >
           <h1 style={{ background: 'white', position: 'absolute', bottom: 0, padding: '1em', width: '10em' }}>
             Just a floating popup.
           </h1>
