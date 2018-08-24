@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
+import GetOverlay from './overlay'
 
 export class Popup extends React.Component {
 
@@ -48,6 +49,11 @@ export class Popup extends React.Component {
     if (!google || !google.maps) {
       return;
     }
+    
+    const Overlay = GetOverlay( google )
+    this.overlay = new Overlay( props )
+    this.overlay.setMap( map )
+    console.log( this.overlay )
 
     const iw = this.Popup = new google.maps.InfoWindow({
       content: '',
