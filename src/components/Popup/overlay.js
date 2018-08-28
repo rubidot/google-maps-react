@@ -10,7 +10,6 @@ export default ( google ) => {
 			this._position = position instanceof google.maps.LatLng ? position : new google.maps.LatLng( position.lat, position.lng );
 		}
 		set children( children ){
-			console.log( 'setting children', children )
 			ReactDOM.render( <div style={ {position:'absolute'} }>{children}</div>, this.anchor)
 		}
 		constructor( { position, children, ...props} ){

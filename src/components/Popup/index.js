@@ -10,7 +10,6 @@ export class Popup extends React.Component {
     const Overlay = GetOverlay( google )
     this.overlay = new Overlay( this.props )
     this.overlay.setMap( this.props.map )
-    console.log( 'mount' )
   }
 
   componentDidUpdate(prevProps) {
