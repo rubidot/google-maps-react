@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
+import ReactDOM from 'react-dom'
 // Export a function that returns the class, because it must be created after google is loaded
 export default ( google ) => {
 	return class Overlay extends google.maps.OverlayView {
@@ -10,7 +10,8 @@ export default ( google ) => {
 			this._position = position instanceof google.maps.LatLng ? position : new google.maps.LatLng( position.lat, position.lng );
 		}
 		set children( children ){
-			this.anchor.innerHTML = ReactDOMServer.renderToStaticMarkup(<div style={ {position:'absolute'} }>{children}</div>)
+			console.log( 'setting children', children )
+			ReactDOM.render( <div style={ {position:'absolute'} }>{children}</div>, this.anchor)
 		}
 		constructor( { position, children, ...props} ){
 			super()
