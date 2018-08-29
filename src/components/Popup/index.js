@@ -15,7 +15,7 @@ export class Popup extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { children, google, map, position } = this.props;
-    position instanceof google.maps.LatLng ? position : new google.maps.LatLng( position.lat, position.lng )
+    let newPosition = position instanceof google.maps.LatLng ? position : new google.maps.LatLng( position.lat, position.lng )
     
     if (!google || !map) {
       return;
@@ -25,10 +25,10 @@ export class Popup extends React.Component {
       console.log( 'new map' )
       this.overlay.setMap( map )
     }
-    if( ! position.equals( prevProps.position ) ){
+    if( ! newPosition.equals( prevProps.position ) ){
       console.log( 'new position' )
-      this.overlay.position = position
-      map.panTo( position )
+      this.overlay.position = newPosition
+      map.panTo( newPosition )
     }
     if ( children !== prevProps.children) {
       console.log( 'new children')
