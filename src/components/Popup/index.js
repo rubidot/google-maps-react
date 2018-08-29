@@ -10,6 +10,7 @@ export class Popup extends React.Component {
     const Overlay = GetOverlay( google )
     this.overlay = new Overlay( this.props )
     this.overlay.setMap( this.props.map )
+    console.log( 'popup did mount' )
   }
 
   componentDidUpdate(prevProps) {
@@ -20,19 +21,21 @@ export class Popup extends React.Component {
     }
     
     if (map !== prevProps.map) {
+      console.log( 'new map' )
       this.overlay.setMap( map )
     }
     if( position !== prevProps.position ){
-      this.overlay.setMap( null )
+      console.log( 'new position' )
       this.overlay.position = position
-      this.overlay.setMap( map )
       map.panTo( position )
     }
     if ( children !== prevProps.children) {
+      console.log( 'new children')
       this.overlay.children = children
     }
   }
   componentWillUnmount(){
+    console.log( 'popup unmounting' )
     if( this.overlay ) this.overlay.setMap( null );
   }
   render() {
