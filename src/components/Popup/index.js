@@ -24,7 +24,7 @@ export class Popup extends React.Component {
       console.log( 'new map' )
       this.overlay.setMap( map )
     }
-    if( position !== prevProps.position ){
+    if( ! position.equals( prevProps.position ) ){
       console.log( 'new position' )
       this.overlay.position = position
       map.panTo( position )
