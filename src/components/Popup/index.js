@@ -15,6 +15,7 @@ export class Popup extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { children, google, map, position } = this.props;
+    position instanceof google.maps.LatLng ? position : new google.maps.LatLng( position.lat, position.lng )
     
     if (!google || !map) {
       return;
