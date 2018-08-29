@@ -5,7 +5,7 @@ import Map from '../../src/index';
 import Popup from '../../src/components/Popup';
 import Marker from '../../src/components/Marker';
 
-class WithMarkers extends Component {
+class WithPopups extends Component {
   state = {
     selectedPlace: {}
   };
@@ -48,7 +48,7 @@ class WithMarkers extends Component {
           </div>
         </Popup> }
 
-        {<Popup position={{ lat: 37.765703, lng: -122.42564 }} >
+        { false && <Popup position={{ lat: 37.765703, lng: -122.42564 }} >
           <h1 style={{ background: 'white', position: 'absolute', bottom: 0, padding: '1em', width: '10em' }}>
             Just a floating popup.
           </h1>
@@ -58,4 +58,4 @@ class WithMarkers extends Component {
   }
 }
 
-export default WithMarkers;
+export default WithPopups;

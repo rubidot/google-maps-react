@@ -18,7 +18,6 @@ export default ( google ) => {
 			this.anchor   = document.createElement( 'div' );
 			this.anchor.style.position='absolute'
 			this.children = children
-			this.marker   = props.marker;
 		}
 		draw = () => {
 	    var divPosition = this.getProjection().fromLatLngToDivPixel(this.position);

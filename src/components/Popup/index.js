@@ -26,6 +26,7 @@ export class Popup extends React.Component {
       this.overlay.setMap( null )
       this.overlay.position = position
       this.overlay.setMap( map )
+      map.panTo( position )
     }
     if ( children !== prevProps.children) {
       this.overlay.children = children
@@ -44,7 +45,6 @@ Popup.propTypes = {
   map: PropTypes.object,
   marker: PropTypes.object,
   position: PropTypes.object,
-  visible: PropTypes.bool,
 
   // callbacks
   onClose: PropTypes.func,
@@ -52,7 +52,6 @@ Popup.propTypes = {
 }
 
 Popup.defaultProps = {
-  visible: false
 }
 
 export default Popup
